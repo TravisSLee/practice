@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Dishes({dishes, setDishes}) {
+export default function Dishes({dishes, setDishes, query}) {
     function handleDelete(id){
         const newList = dishes.filter((d) => d.id !== id)
         setDishes(newList)
@@ -9,10 +9,14 @@ export default function Dishes({dishes, setDishes}) {
   
     return (
     <div>{
-        dishes.map((d) => (
+        query.map((q) => (
             <>
-                <div key={d.id} > {d.name} </div>
-                <button type="button" onClick={() => handleDelete(d.id)}>Delete this Dish</button>
+                <div key={q.id} > {q.name} </div>
+                <div>Ingredients:</div>
+                {q.ingredients.map((i,index) => (
+                    <div key={index}>{i}</div>
+                ))} 
+                <button type="button" onClick={() => handleDelete(q.id)}>Delete this Dish</button>
             </>    
         ))}
         
